@@ -111,3 +111,22 @@ test('穿墙模式：从右边界穿到左边界，不结束', () => {
   assert.equal(g.state, 'running');
   assert.equal(g.snake[0].x, 0);
 });
+test('暂停：state 变为 paused，step 不动', () => {
+  const g = fresh();
+  g.pause();
+  assert.equal(g.state, 'paused');
+  const before = { ...g.snake[0] };
+  g.step();
+  assert.deepEqual(g.snake[0], before);
+});
+
+test('继续：resume 后恢复前进', () => {
+  const g = fresh();
+  g.setFood(0, 0);
+  g.pause();
+  g.step();
+  g.resume();
+  assert.equal(g.state, 'running');
+  g.step();
+  assert.deepEqual(g.snake[0], { x: 11, y: 10 });
+});
