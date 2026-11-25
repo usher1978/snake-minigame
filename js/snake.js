@@ -96,8 +96,8 @@ export class SnakeGame {
     if (this.state === 'paused') this.state = 'running';
   }
 
-  /** 每 10 分提速 20ms，下限 80ms */
+  /** 每 10 分提速 20ms，下限 70ms */
   get speed() {
-    return Math.max(80, 240 - 20 * Math.floor(this.score / 10));
+    return Math.max(70, 200 - 20 * Math.floor(this.score / 10));
   }
 }
