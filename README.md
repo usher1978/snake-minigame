@@ -20,7 +20,7 @@ snake-minigame/
 
 ## 运行
 
-- 测试：`node --test tests`（或 `npm test`）
+- 测试：`node --test`（或 `npm test`）
 - 抖音开发者工具：导入项目，类型选小游戏；appid 填自己的。
 
 ## 防线段（guard）

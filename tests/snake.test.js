@@ -98,7 +98,7 @@ test('速度随得分加快：0 分 240ms，20 分 200ms，下限 80ms', () => {
   g.step();
   assert.equal(g.score, 20);
   assert.equal(g.speed, 200);
-  g.score = 100;
+  g.score = 60;
   assert.equal(g.speed, 120);
   g.score = 1000;
   assert.equal(g.speed, 80);
