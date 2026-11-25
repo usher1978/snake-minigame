@@ -89,19 +89,19 @@ test('食物不能落在蛇身上', () => {
   assert.deepEqual(g.food, { x: 0, y: 0 });
 });
 
-test('速度随得分加快：0 分 240ms，20 分 200ms，下限 80ms', () => {
+test('速度随得分加快：0 分 200ms，20 分 160ms，下限 70ms', () => {
   const g = fresh();
-  assert.equal(g.speed, 240);
+  assert.equal(g.speed, 200);
   g.setFood(11, 10);
   g.step();
   g.setFood(12, 10);
   g.step();
   assert.equal(g.score, 20);
-  assert.equal(g.speed, 200);
+  assert.equal(g.speed, 160);
   g.score = 60;
-  assert.equal(g.speed, 120);
-  g.score = 1000;
   assert.equal(g.speed, 80);
+  g.score = 1000;
+  assert.equal(g.speed, 70);
 });
 
 test('穿墙模式：从右边界穿到左边界，不结束', () => {
