@@ -75,7 +75,7 @@ def measure(runner: str, workdir: str, tests_dir: str) -> dict:
         stats = parse_pytest_run(r.stdout + r.stderr)
         return {"total": total, **stats}
     if runner == "node-test":
-        p = run_cmd(f"node --test {tests_dir}", workdir, shell=True)
+        p = run_cmd("node --test", workdir, shell=True)
         return parse_node_test(p.stdout + p.stderr)
     if runner == "jest":
         with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tf:
