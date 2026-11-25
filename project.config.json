@@ -1,0 +1,12 @@
+{
+  "appid": "",
+  "projectname": "snake",
+  "description": "抖音小游戏 · 贪吃蛇",
+  "compileType": "game",
+  "setting": {
+    "es6": true,
+    "minified": false,
+    "urlCheck": false,
+    "autoAudits": false
+  }
+}
