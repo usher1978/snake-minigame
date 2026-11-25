@@ -86,6 +86,16 @@ export class SnakeGame {
     return 'die';
   }
 
+  /** 暂停：仅运行中可暂停；暂停期间 step 不动 */
+  pause() {
+    if (this.state === 'running') this.state = 'paused';
+  }
+
+  /** 继续：仅暂停中可继续 */
+  resume() {
+    if (this.state === 'paused') this.state = 'running';
+  }
+
   /** 每 10 分提速 20ms，下限 80ms */
   get speed() {
     return Math.max(80, 240 - 20 * Math.floor(this.score / 10));
