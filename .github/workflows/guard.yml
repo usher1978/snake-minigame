@@ -1,0 +1,36 @@
+name: guard
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出 PR 代码
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          path: pr
+      - name: 检出 main 的检查脚本与基线（trusted）
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.base_ref }}
+          path: trusted
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 保护文件检查
+        working-directory: pr
+        run: python3 ../trusted/guard/check_protected.py --base "origin/${{ github.base_ref }}" --config ../trusted/guard/config.json
+      - name: 作弊关键字扫描
+        working-directory: pr
+        run: python3 ../trusted/guard/scan_diff.py --base "origin/${{ github.base_ref }}" --config ../trusted/guard/config.json
+      - name: 运行测试
+        working-directory: pr
+        run: node --test
+      - name: 数量与 skip 检查（基线来自 main）
+        working-directory: pr
+        run: python3 ../trusted/guard/check_counts.py --runner node-test --baseline ../trusted/guard/baseline.json
