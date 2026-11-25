@@ -50,6 +50,16 @@ export class Renderer {
     ctx.textBaseline = 'top';
     ctx.fillText(`得分 ${game.score}`, ox + 6, oy - cell * 1.6);
 
+    if (game.state === 'paused') {
+      ctx.fillStyle = 'rgba(0,0,0,0.45)';
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#fff';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = `${Math.round(cell * 1.4)}px sans-serif`;
+      ctx.fillText('暂停中 · 点击继续', w / 2, h / 2);
+    }
+
     if (game.state === 'over') {
       ctx.fillStyle = 'rgba(0,0,0,0.62)';
       ctx.fillRect(0, 0, w, h);
